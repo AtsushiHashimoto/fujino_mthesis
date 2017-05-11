@@ -50,8 +50,8 @@ def parse():
     parser.add_argument('-suffix', help=u"suffix of data (When test data is generated, suffix is ''test'')",
                         default = SUFFIX)
 
-    parser.add_argument('-in_recipe_path', help=u"優先的に含めたいレシピのID",
-                        default = IN_RECIPE_PATH)
+    #parser.add_argument('-in_recipe_path', help=u"優先的に含めたいレシピのID",
+    #                    default = IN_RECIPE_PATH)
     parser.add_argument('-ner_dir',
                         default = NER_DIR)
     parser.add_argument('-recipe_dir_path',
@@ -85,9 +85,6 @@ def check_test_idx(recipe_list, test_dir):
 
 
 def exist_label(recipe_id, label_dir, rcp_loc_steps):
-    print(type(recipe_id))
-    print(recipe_id)
-    print(recipe_id.decode('utf-8'))
     path = os.path.join(label_dir, 
                         rcp_loc_steps[recipe_id]["dir"], 
                         recipe_id + "_%s.json" % rcp_loc_steps[recipe_id]["steps"][0])
@@ -154,7 +151,8 @@ def check_recipe_ingredients(recipe_id, ner_dir, recipe_dir, ingredients, synony
 
 def main(output_dir, recipe_ids_path, step_dir,rcp_loc_steps_path, label_dir,
     n_recipe, test_dir, suffix,
-    in_recipe_path, ner_dir, recipe_dir_path, synonym_path, ingredients):
+    # in_recipe_path, 
+    ner_dir, recipe_dir_path, synonym_path, ingredients):
     print suffix
 
     print("load...")
@@ -196,10 +194,10 @@ def main(output_dir, recipe_ids_path, step_dir,rcp_loc_steps_path, label_dir,
     #    return 
     #recipe_ids = recipe_ids[:n_recipe]
 
-    #入れたいものを前に持ってくる
-    in_recipe_ids = open(in_recipe_path).readlines()
-    in_idx = np.array([r in in_recipe_ids for r in recipe_ids])
-    recipe_ids = np.hstack([recipe_ids[in_idx], recipe_ids[~in_idx]])
+    ##入れたいものを前に持ってくる
+    #in_recipe_ids = open(in_recipe_path).readlines()
+    #in_idx = np.array([r in in_recipe_ids for r in recipe_ids])
+    #recipe_ids = np.hstack([recipe_ids[in_idx], recipe_ids[~in_idx]])
 
     #材料が入っていないことを判定
     #n_recipeを超えるかrecipe_idsがなくなるまで繰り返す
