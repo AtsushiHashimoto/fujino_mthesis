@@ -85,15 +85,14 @@ def check_test_idx(recipe_list, test_dir):
 
 
 def exist_label(recipe_id, label_dir, rcp_loc_steps):
-    print(type(recipe_id))
-    print(recipe_id)
-    print(recipe_id.decode('utf-8'))
     path = os.path.join(label_dir, 
                         rcp_loc_steps[recipe_id]["dir"], 
                         recipe_id + "_%s.json" % rcp_loc_steps[recipe_id]["steps"][0])
     if os.path.exists(path):
         return True
     else:
+        #print("path not found")
+        #print(path)
         return False
 
 

@@ -18,6 +18,7 @@ mkdir -p ../exp/${RECIPE_DIR}/neg${CLUSTER}
 mkdir -p ../exp/caffe_db/${CLUSTER}/init
 
 #学習に用いるレシピIDを決定
+echo "学習に用いるレシピIDを決定"
 python ../tools/learning/gen_test_train_recipe_ids.py \
 	-ingredients ${FOODS} \
 	-input_dir ../exp/${RECIPE_DIR} \
@@ -30,6 +31,7 @@ python ../tools/learning/gen_test_train_recipe_ids.py \
 	-n_test_recipe 100 
 
 # 陰性訓練データ用(食材を含まないレシピから選択)
+echo "陰性訓練データ用(食材を含まないレシピから選択)"
 if [ ! -e ../exp/recipes/neg${CLUSTER} ]; then
 	mkdir ../exp/recipes/neg${CLUSTER}
 fi
@@ -43,9 +45,11 @@ python ../tools/learning/get_recipe_ids_wo_ings.py \
 	-test_dir ../exp/recipes/TEST \
 	-suffix test \
 	-ner_dir ../external/NLP/NER/data \
-	-recipe_dir_path ../exp/flowgraph/recipe_directory.json \
+	-recipe_dir_path ../external/recipe_directory.json \
 	-synonym_path ../external/ontology/synonym.tsv \
 	-ingredients ${FOODS}
+
+echo "陰性訓練データ用(suffix:train)"
 python ../tools/learning/get_recipe_ids_wo_ings.py \
 	-recipe_ids_path ../exp/${RECIPE_DIR}/recipes_今日の料理.tsv \
 	-output_dir ../exp/recipes/neg${CLUSTER} \
@@ -56,7 +60,7 @@ python ../tools/learning/get_recipe_ids_wo_ings.py \
 	-test_dir ../exp/${RECIPE_DIR}/TEST \
 	-suffix train \
 	-ner_dir ../external/NLP/NER/data \
-	-recipe_dir_path ../exp/flowgraph/recipe_directory.json \
+	-recipe_dir_path ../external/recipe_directory.json \
 	-synonym_path ../external/ontology/synonym.tsv \
 	-ingredients ${FOODS}
 
