@@ -1,4 +1,5 @@
-#必要なライブラリ
+# 必要なライブラリ
+
 - numpy
 - scipy
 - scikit-learn
@@ -37,7 +38,7 @@
  - 実行手順->初期学習->前準備参照
 
 
-#実行手順
+# 実行手順
 - 各スクリプトはscriptディレクトリをカレントディレクトリとして実行.
 - 修論時の結果はexp/master\_thesisに保存.  
 特に修論時のモデルを使用する場合はexp/master\_thesis/caffe\_db\_master\_thesis/Readme.mdも参照.
@@ -240,7 +241,9 @@ suffixの番号がnのdb\_\*.h5には, 同じ番号nのdata\_.npyを反転させ
 +|   }
 +| }
 ```
-			- 一番下のINNER_PRODUCTとSOFTMAXを消して書き換え  
+			
+- 一番下のINNER_PRODUCTとSOFTMAXを消して書き換え  
+
 後のプログラムで呼び出せるように名前をfc8からcls\_scoreに(fc8だと初期値のcaffemodelとレイヤーの構造が一致せずエラー), 
 最後の層はloss\_cls . 
 num\_outputをクラスタに含まれる食材数+1(背景クラス)にする.  
@@ -293,8 +296,10 @@ num\_outputをクラスタに含まれる食材数+1(背景クラス)にする.
 +|   loss_weight: 1
 +| }
 ```
-		- exp/caffe\_db/(クラスタ番号)/init/prototxt/deploy.prototxt
-			- input layerの設定(最初の次元を1にしないと1枚の入力に対して同じ値が10個返されたりする?)  
+		
+- exp/caffe\_db/(クラスタ番号)/init/prototxt/deploy.prototxt
+- input layerの設定(最初の次元を1にしないと1枚の入力に対して同じ値が10個返されたりする?)  
+
 ```
 -| input: "data"
 -| input_dim: 10
@@ -308,7 +313,8 @@ num\_outputをクラスタに含まれる食材数+1(背景クラス)にする.
 +|   input_param { shape: { dim: 1 dim: 3 dim: 224 dim: 224 } }
 +| }
 ```
-			- train.prototxtと同様にfc8をcls_scoreに書き換え. 
+			
+- train.prototxtと同様にfc8をcls_scoreに書き換え. 
 最終層はSigmoidで名前はcls\_probにする.
 ```
 -| layers {
@@ -356,8 +362,9 @@ num\_outputをクラスタに含まれる食材数+1(背景クラス)にする.
 +|   type: "Sigmoid"
 +| }
 ```
-		- exp/caffe\_db/(クラスタ番号)/init/prototxt/solver.prototxt
-			- 以下は例.  
+		
+- exp/caffe\_db/(クラスタ番号)/init/prototxt/solver.prototxt
+- 以下は例.  
 exp/caffe\_db/(クラスタ番号)/init/img\_list\_\*.tsvの行数からデータ数を求める.  
 1epochはデータ数\*2(左右反転)/20(バッチサイズ)で計算.  
 testはあんまり意味が無いので適当.  
@@ -436,7 +443,7 @@ Faster R-CNNの学習の入力として必要なexp/caffe\_db/(クラスタ番�
 訓練データ選択をしてからVGG-16などFaster R-CNN以外のモデルで学習するなどの場合はデータベースを作り直す必要があり, 
 その場合はtools/update\_label\_remove.pyではなくtools/refine\_db\_remove.py(その他のソースコードで説明)を用いる.
 
-###出力
+### 出力
 - exp/caffe\_db/(クラスタ番号)/refine/(ITER)/fp\_estimation  
 訓練データ選択結果. 
 	- food(食材インデックス)/out_(食材インデックス).npy  
@@ -713,4 +720,3 @@ script/5.5\_evaluate\_filtering.sh
 #注意事項
 - ソースコードの中に何故かsys.path.append(os.path.join(\_\_file\_\_, "../"))で修論時問題なく動いているものがありました. 
 tools/moduleがimportエラーなどの場合, 正しくはsys.path.append(os.path.join(os.path.dirname(\_\_file\_\_), "../"))なので書き換えてください.
-
