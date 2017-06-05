@@ -85,9 +85,11 @@ def check_test_idx(recipe_list, test_dir):
 
 
 def exist_label(recipe_id, label_dir, rcp_loc_steps):
+    #print("in exist_label")
     path = os.path.join(label_dir, 
                         rcp_loc_steps[recipe_id]["dir"], 
                         recipe_id + "_%s.json" % rcp_loc_steps[recipe_id]["steps"][0])
+    #print(path)
     if os.path.exists(path):
         return True
     else:
@@ -168,9 +170,12 @@ def main(output_dir, recipe_ids_path, step_dir,rcp_loc_steps_path, label_dir,
 
     ingredients = ingredients.split(",")
 
+    recipe_ids_path = unicode(recipe_ids_path,'utf-8')
     print("load recipes...")
     recipe_df = pd.read_csv(recipe_ids_path, delimiter='\t', header=None, encoding='utf-8')
     recipe_ids = recipe_df[0].values.tolist()
+
+    print("# of target recipes: ", len(recipe_ids))
 
     # ラベル生成済みのみ
     recipe_ids = [r for r in recipe_ids if exist_label(r, label_dir, rcp_loc_steps)]

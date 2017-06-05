@@ -14,9 +14,9 @@ if [ ! -e ../exp/caffe_db/${CLUSTER}/refine ]; then
 	mkdir ../exp/caffe_db/${CLUSTER}/refine
 fi
 
-if [ ! -e ../exp/caffe_db/${CLUSTER}/refine/${ITER} ]; then
-	mkdir ../exp/caffe_db/${CLUSTER}/refine/${ITER}
-fi
+#if [ ! -e ../exp/caffe_db/${CLUSTER}/refine/${ITER} ]; then
+#	mkdir ../exp/caffe_db/${CLUSTER}/refine/${ITER}
+#fi
 
 python ../tools/learning/extract_features.py \
 	-output_dir ../exp/caffe_db/${CLUSTER}/refine/${ITER} \

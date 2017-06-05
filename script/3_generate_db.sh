@@ -2,6 +2,8 @@ CLUSTER=0002
 FOODS_="ジャガイモ 豆腐"
 FOODS=ジャガイモ,豆腐
 
+# TO DO: FOODSを自動で設定してこのスクリプトをぶん回す．
+
 #GROUPING_DIR=grouping
 GROUPING_DIR=grouping_master_thesis
 RECIPE_DIR=recipes
@@ -29,7 +31,6 @@ python ../tools/learning/gen_test_train_recipe_ids.py \
 	-test_dir ../exp/recipes/TEST \
 	-n_train_recipe 625 \
 	-n_test_recipe 100 
-
 # 陰性訓練データ用(食材を含まないレシピから選択)
 echo "陰性訓練データ用(食材を含まないレシピから選択)"
 if [ ! -e ../exp/recipes/neg${CLUSTER} ]; then
@@ -76,7 +77,8 @@ fi
 if [ ! -e ../exp/${DB_DIR}/${CLUSTER}/init ]; then
 	mkdir ../exp/${DB_DIR}/${CLUSTER}/init
 fi
-# テスト用のimage listを作成
+
+echo "テスト用のimage listを作成"
 python ../tools/learning/make_img_list.py \
 	-output_dir ../exp/${DB_DIR}/${CLUSTER}/init \
 	-rcp_loc_steps_path ../exp/recipe_location_steps.json \
@@ -90,7 +92,7 @@ python ../tools/learning/make_img_list.py \
 	-mode center \
 	-ss_dir ../exp/selective_search
 
-# train用のDataBase作成
+echo "train用のDataBase作成"
 python ../tools/learning/generate_db.py \
 	-output_dir ../exp/${DB_DIR}/${CLUSTER}/init \
 	-rcp_loc_steps_path ../exp/recipe_location_steps.json \

@@ -46,9 +46,10 @@ def main(ingredients, input_dir, output_dir, step_dir, rcp_loc_step_path,
 
     for ingredient in ingredients:
         input_path = os.path.join(input_dir, u"recipes_%s.tsv" % ingredient)
-        output_ing_dir = os.path.join(output_dir, u"%s_625" % ingredient)
+        #output_ing_dir = os.path.join(output_dir, u"%s_625" % ingredient)
+        output_ing_dir = os.path.join(output_dir, u"%s" % ingredient)
 
-        print input_path
+        #print input_path
         if not os.path.exists(output_ing_dir):
             os.mkdir(output_ing_dir)
 

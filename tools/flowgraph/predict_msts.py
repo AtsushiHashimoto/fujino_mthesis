@@ -42,7 +42,6 @@ def main(ner_dir, compG_dir, recipe_ids_path, recipe_dir_path,
 
     with open(recipe_dir_path, 'r') as fin:
         recipe_dir = json.load(fin)
-
     with open(recipe_ids_path, 'r') as fin:
         recipe_ids = fin.readlines()
     recipe_ids = [recipe_id.strip() for recipe_id in recipe_ids]
