@@ -40,9 +40,9 @@
 
 # 実行手順
 - 開発関係の違いからロケールの変更が必要．
-	Ubuntu
-		$ apt-get install language-pack-ja
-		$ update-locale LANG=ja_JP.UTF-8
+	- Ubuntu
+		- $ apt-get install language-pack-ja
+		- $ update-locale LANG=ja_JP.UTF-8
 - 各スクリプトはscriptディレクトリをカレントディレクトリとして実行.
 - 修論時の結果はexp/master\_thesisに保存.  
 特に修論時のモデルを使用する場合はexp/master\_thesis/caffe\_db\_master\_thesis/Readme.mdも参照.
